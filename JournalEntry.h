@@ -2,13 +2,18 @@
 #define JOURNALENTRY_H
 
 #include <string>
+#include <ctime>
 using namespace std;
 
 class JournalEntry {
     public:
         JournalEntry();
+        void setDateCreated();
+        string getDateCreated();
+        string getPrettyDateCreated();
     private:
-        int date_created;
+        char date_created[50];
+        char pretty_date_created[50];
         string title;
 };
 
