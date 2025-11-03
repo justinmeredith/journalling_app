@@ -13,7 +13,7 @@ class JournalEntry {
         string getPrettyDateCreated();
     private:
         char date_created[50];
-        char pretty_date_created[50];
+        char pretty_date_created[100];
         string title;
 };
 
