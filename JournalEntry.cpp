@@ -1,7 +1,8 @@
 #include "JournalEntry.h"
 
-JournalEntry::JournalEntry() {
+JournalEntry::JournalEntry(string input_title) {
     setDateCreated();
+    title = input_title;
 }
 
 void JournalEntry::setDateCreated() {
@@ -16,4 +17,28 @@ string JournalEntry::getDateCreated() {
 
 string JournalEntry::getPrettyDateCreated() {
     return pretty_date_created;
+}
+
+string JournalEntry::getTitle() {
+    return title;
+}
+
+string JournalEntry::getText() {
+    return text;
+}
+
+void JournalEntry::displayJournalEntry() {
+    cout << endl << getTitle() << endl;
+    cout << getPrettyDateCreated() << endl;
+    cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
+    cout << getText() << endl;
+    cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
+}
+
+void JournalEntry::writeInJournal() {
+    cout << endl << "Write your journal entry below." << endl;
+    cout << "To finish the entry, type the '~' symbol followed by the 'return' key." << endl;
+    cout << "Everything after the '~' will not be included in your entry." << endl << endl << " > ";
+    getline(cin, text, '~');
+    cout << endl << "Entry recorded." << endl;
 }

@@ -1,9 +1,12 @@
-#include <iostream>
 #include "JournalEntry.cpp"
 
 int main() {
-    JournalEntry testing_entry;
-    cout << "Date Created: " << testing_entry.getDateCreated() << endl;
-    cout << "Pretty Date Created: " << testing_entry.getPrettyDateCreated() << endl;
+    string user_entry_title;
+    cout << "The name of today's entry: ";
+    getline(cin, user_entry_title, '\n');
+    JournalEntry new_entry(user_entry_title);
+
+    new_entry.writeInJournal();
+    new_entry.displayJournalEntry();
     return 0;
 }

@@ -3,18 +3,24 @@
 
 #include <string>
 #include <ctime>
+#include <iostream>
 using namespace std;
 
 class JournalEntry {
     public:
-        JournalEntry();
+        JournalEntry(string input_title);
         void setDateCreated();
         string getDateCreated();
         string getPrettyDateCreated();
+        string getTitle();
+        string getText();
+        void displayJournalEntry();
+        void writeInJournal();
     private:
         char date_created[50];
         char pretty_date_created[100];
         string title;
+        string text;
 };
 
 #endif
