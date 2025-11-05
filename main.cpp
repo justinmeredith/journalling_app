@@ -7,9 +7,10 @@ int main() {
     bool running = true;
     string user_decision;
 
+    cout << "Your Journal." << endl;
+    cout << "  An app by Justin Meredith." << endl;
+
     while (running) {
-        cout << "Your Journal." << endl;
-        cout << "  An app by Justin Meredith." << endl;
         cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
         cout << endl << "What would you like to do today?" << endl << endl;
         cout << "    1. Write a new journal entry" << endl;
@@ -31,9 +32,9 @@ int main() {
             cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
             running = false;
         } else {
-            cout << "Please choose an option from the list and enter its corresponding number." << endl;
-            cout << "For instance, to choose the first option, 'Write a new journal entry'," << endl;
-            cout << "type '1' and then hit the 'return' key." << endl;
+            cout << "<*> Please choose an option from the list and enter its corresponding number. <*>" << endl;
+            cout << "<*> For instance, to choose the first option, 'Write a new journal entry',    <*>" << endl;
+            cout << "<*> type '1' and then hit the 'return' key.                                   <*>" << endl;
             cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
         }
     }
