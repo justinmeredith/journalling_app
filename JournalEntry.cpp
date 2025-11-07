@@ -40,5 +40,9 @@ void JournalEntry::writeInJournal() {
     cout << "To finish the entry, type the '~' symbol followed by the 'return' key." << endl;
     cout << "Everything after the '~' will not be included in your entry." << endl << endl << " > ";
     getline(cin, text, '~');
+    ofstream new_entry (getDateCreated() + ".txt");
+    new_entry << getPrettyDateCreated() << endl;
+    new_entry << getTitle() << endl;
+    new_entry << getText() << endl;
     cout << endl << "Entry recorded." << endl;
 }
