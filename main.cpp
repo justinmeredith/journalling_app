@@ -2,10 +2,19 @@
 // Development started in November of 2025.
 
 #include "JournalEntry.cpp"
+#include <vector>
+#include <filesystem>
+
+// JournalEntry loadUserJournal() {
+//     This will loop through all of the files in the 'entries' directory 
+//     and store them in a vector user_journal as JournalEntry instances
+//     Right now it's just placeholder text
+// }
 
 int main() {
     bool running = true;
     string user_decision;
+    vector<JournalEntry> user_journal;
 
     cout << "Your Journal." << endl;
     cout << "  An app by Justin Meredith." << endl;
@@ -14,6 +23,7 @@ int main() {
         cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
         cout << endl << "What would you like to do today?" << endl << endl;
         cout << "    1. Write a new journal entry" << endl;
+        cout << "    2. Delete a journal entry" << endl;
         cout << "    0. Exit" << endl;
         cout << endl << "> ";
 
@@ -27,6 +37,9 @@ int main() {
             getline(cin, user_entry_title, '\n');
             JournalEntry new_entry(user_entry_title);
             new_entry.writeInJournal();
+        } else if (user_decision == "2") {
+            cout << "This option is not currently functional." << endl;
+            cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
         } else if (user_decision == "0") {
             cout << endl << "Thanks for stopping by! See you next time." << endl;
             cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
