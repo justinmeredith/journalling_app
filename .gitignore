@@ -2,3 +2,4 @@ Journalling App Design Plan.md
 *.out
 .vscode
 *.txt
+.DS_Store
