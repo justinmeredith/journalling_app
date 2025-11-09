@@ -5,11 +5,29 @@
 #include <vector>
 #include <filesystem>
 
-// JournalEntry loadUserJournal() {
-//     This will loop through all of the files in the 'entries' directory 
-//     and store them in a vector user_journal as JournalEntry instances
-//     Right now it's just placeholder text
-// }
+ vector<JournalEntry> loadUserJournal() {
+    vector<JournalEntry> loaded_entries;
+    
+    // Steps through every file in the entries directory
+    for (const auto& entry : std::filesystem::directory_iterator("entries")) {
+        // Stores the current file name in the format "file_name.txt"
+        string file_name= entry.path().filename().string();
+        string file_contents;
+
+        // Opens the current file
+        ifstream journal_entry(file_name);
+        string line;
+
+        // Stores each line of the file
+        while (getline(journal_entry, line)) {
+            file_contents += line;
+        }
+
+        JournalEntry loading_entry(file_name, file_contents);
+        loaded_entries.push_back(loading_entry);
+    }
+    return loaded_entries;
+}
 
 int main() {
     bool running = true;

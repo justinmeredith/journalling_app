@@ -10,6 +10,7 @@ using namespace std;
 class JournalEntry {
     public:
         JournalEntry(string input_title);
+        JournalEntry(string file_name, string file_contents);
         void setDateCreated();
         string getDateCreated();
         string getPrettyDateCreated();
