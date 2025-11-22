@@ -6,12 +6,17 @@ JournalEntry::JournalEntry(string input_title) {
 }
 
 JournalEntry::JournalEntry(string file_name, string file_contents) {
-    file_name.erase(-3);
-    cout << "Erased file_name: " << file_name << endl;
-    // Stores file_name to date_created after converting it to a character array
     strcpy(date_created, file_name.c_str());
-    string contents_array[3];
+    stringstream file_contents_stream(file_contents);
+    string pretty_date_string;
+    getline(file_contents_stream, pretty_date_string);
+    strcpy(pretty_date_created, pretty_date_string.c_str());
+    getline(file_contents_stream, title);
 
+    string line;
+    while (getline(file_contents_stream, line)) {
+        text += line + "\n";
+    }
 }
 
 void JournalEntry::setDateCreated() {
