@@ -34,12 +34,23 @@
     return loaded_entries;
 }
 
+void displayPreviousEntries(vector<JournalEntry> past_entries) {
+    if (past_entries.size() == 0) {
+        cout << "There are no past entries to display.";
+    } else {
+        cout << "Here are your previous journal entries: " << endl;
+        for (int i = 0; i < past_entries.size(); ++i) {
+            cout << "   " << i + 1 << ": " << past_entries.at(i).getPrettyDateCreated() << " - " << past_entries.at(i).getTitle() << endl;
+        }
+    } 
+}
+
 int main() {
     bool running = true;
     string menu_line = "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
     string user_decision;
     vector<JournalEntry> user_journal;
-    vector<JournalEntry> past_entries = loadUserJournal();
+    vector<JournalEntry> past_entries;
 
     cout << "Your Journal." << endl;
     cout << "  An app by Justin Meredith." << endl;
@@ -49,7 +60,8 @@ int main() {
         cout << endl << "What would you like to do today?" << endl << endl;
         cout << "    1. Write a new journal entry" << endl;
         cout << "    2. View previous journal entries" << endl;
-        cout << "    3. Delete a journal entry" << endl;
+        cout << "    3. Open and edit previous journal entry" << endl;
+        cout << "    4. Delete a journal entry" << endl;
         cout << "    0. Exit" << endl;
         cout << endl << "> ";
 
@@ -64,15 +76,44 @@ int main() {
             JournalEntry new_entry(user_entry_title);
             new_entry.writeInJournal();
         } else if (user_decision == "2") {
-            if (past_entries.size() == 0) {
-                cout << "There are no past entries to display.";
-                continue;
-            }
-            cout << "Here are your previous journal entries: " << endl;
-            for (int i = 0; i < past_entries.size(); ++i) {
-                cout << "   " << i + 1 << ": " << past_entries.at(i).getPrettyDateCreated() << " - " << past_entries.at(i).getTitle() << endl;
-            }
+            past_entries = loadUserJournal();
+            displayPreviousEntries(past_entries);
         } else if (user_decision == "3") {
+            displayPreviousEntries(past_entries);
+            int user_entry_selection;
+            bool valid_input = false;
+
+            // Make sure a viable journal entry was selected
+            while (!valid_input) {
+                cout << endl << "Type the number of the entry you would like to open." << endl;
+                cout << "Or enter '0' to return to the main menu." << endl;
+                cout << "> ";
+                cin.clear();
+                cin.ignore();
+                cin >> user_entry_selection;
+
+                if (!cin) {
+                    cout << menu_line;
+                    cout << "<*> Please enter a valid selection by typing the number that corresponds to the   <*>" << endl;
+                    cout << "<*> entry you would like to open. For instance, type '1' to open the first entry. <*>" << endl;
+                    cout << "<*> Or enter '0' to return to the main menu.                                      <*>" << endl;
+                    cout << menu_line;
+                    continue;
+                }
+
+                if (user_entry_selection <= past_entries.size() && user_entry_selection >= 0) {
+                    valid_input = true;
+                } else {
+                    cout << menu_line;
+                    cout << "<*> Please enter a valid selection by typing the number that corresponds to the   <*>" << endl;
+                    cout << "<*> entry you would like to open. For instance, type '1' to open the first entry. <*>" << endl;
+                    cout << "<*> Or enter '0' to return to the main menu.                                      <*>" << endl;
+                    cout << menu_line;
+                }
+            }
+
+            past_entries.at(user_entry_selection - 1).addToJournalEntry();
+        } else if (user_decision == "4") {
             cout << "This option is not currently functional." << endl;
         } else if (user_decision == "0") {
             cout << endl << "Thanks for stopping by! See you next time." << endl;
@@ -84,6 +125,6 @@ int main() {
             cout << "<*> type '1' and then hit the 'return' key.                                   <*>" << endl;
             cout << menu_line;
         }
-    }
+    } 
     return 0;
 }

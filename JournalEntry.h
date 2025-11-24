@@ -19,6 +19,7 @@ class JournalEntry {
         string getText();
         void displayJournalEntry();
         void writeInJournal();
+        void addToJournalEntry();
     private:
         char date_created[50];
         char pretty_date_created[100];

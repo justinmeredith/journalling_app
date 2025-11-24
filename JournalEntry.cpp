@@ -61,3 +61,21 @@ void JournalEntry::writeInJournal() {
     new_entry.close();
     cout << endl << "Entry recorded." << endl;
 }
+
+void JournalEntry::addToJournalEntry() {
+    displayJournalEntry();
+    cout << "Enter the text you would like to add to the end of your entry here." << endl;
+    cout << "To finish your additional entry, type the '~' symbol followed by the 'return' key." << endl;
+    cout << "Everything after the '~' will not be included in your entry." << endl << endl << " > ";
+
+    string additional_text;
+    getline(cin, additional_text, '~');
+    text += additional_text;
+
+    ofstream updated_entry ("entries/" + getDateCreated() + ".txt");
+    updated_entry << getPrettyDateCreated() << endl;
+    updated_entry << getTitle() << endl;
+    updated_entry << getText() << endl;
+    updated_entry.close();
+    cout << endl << "Entry updated." << endl;
+}
