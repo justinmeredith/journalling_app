@@ -48,8 +48,8 @@ int main() {
         cout << menu_line;
         cout << endl << "What would you like to do today?" << endl << endl;
         cout << "    1. Write a new journal entry" << endl;
-        cout << "    2. Delete a journal entry" << endl;
-        cout << "    3. View previous journal entries" << endl;
+        cout << "    2. View previous journal entries" << endl;
+        cout << "    3. Delete a journal entry" << endl;
         cout << "    0. Exit" << endl;
         cout << endl << "> ";
 
@@ -64,18 +64,16 @@ int main() {
             JournalEntry new_entry(user_entry_title);
             new_entry.writeInJournal();
         } else if (user_decision == "2") {
-            cout << "This option is not currently functional." << endl;
-            cout << menu_line;
-        } else if (user_decision == "3") {
             if (past_entries.size() == 0) {
                 cout << "There are no past entries to display.";
-                break;
+                continue;
             }
             cout << "Here are your previous journal entries: " << endl;
             for (int i = 0; i < past_entries.size(); ++i) {
                 cout << "   " << i + 1 << ": " << past_entries.at(i).getPrettyDateCreated() << " - " << past_entries.at(i).getTitle() << endl;
             }
-            cout << menu_line;
+        } else if (user_decision == "3") {
+            cout << "This option is not currently functional." << endl;
         } else if (user_decision == "0") {
             cout << endl << "Thanks for stopping by! See you next time." << endl;
             cout << menu_line;
