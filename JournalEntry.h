@@ -13,10 +13,10 @@ class JournalEntry {
         JournalEntry(string input_title);
         JournalEntry(string file_name, string file_contents);
         void setDateCreated();
-        string getDateCreated();
-        string getPrettyDateCreated();
-        string getTitle();
-        string getText();
+        string getDateCreated() const;
+        string getPrettyDateCreated() const;
+        string getTitle() const;
+        string getText() const;
         void displayJournalEntry();
         void writeInJournal();
         void addToJournalEntry();

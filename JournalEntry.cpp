@@ -25,19 +25,19 @@ void JournalEntry::setDateCreated() {
     strftime(pretty_date_created, 100, "%B %e, %Y %I:%M%p", localtime(&current_time));
 }
 
-string JournalEntry::getDateCreated() {
+string JournalEntry::getDateCreated() const {
     return date_created;
 }
 
-string JournalEntry::getPrettyDateCreated() {
+string JournalEntry::getPrettyDateCreated() const {
     return pretty_date_created;
 }
 
-string JournalEntry::getTitle() {
+string JournalEntry::getTitle() const {
     return title;
 }
 
-string JournalEntry::getText() {
+string JournalEntry::getText() const {
     return text;
 }
 

@@ -6,6 +6,7 @@
 #include <filesystem>
 #include <cstdio>
 #include <cstring>
+#include <algorithm>
 
  vector<JournalEntry> loadUserJournal() {
     vector<JournalEntry> loaded_entries;
@@ -33,6 +34,13 @@
         JournalEntry loading_entry(file_name, file_contents);
         loaded_entries.push_back(loading_entry);
     }
+
+    // Sorts the entries in order so that they display neatly for the user
+    sort(loaded_entries.begin(), loaded_entries.end(),
+     [](const JournalEntry& a, const JournalEntry& b) {
+         return a.getDateCreated() < b.getDateCreated();
+     });
+     
     return loaded_entries;
 }
 
