@@ -54,12 +54,13 @@ int main() {
 
     string user_decision;
     vector<JournalEntry> user_journal;
-    vector<JournalEntry> past_entries = loadUserJournal();
+    vector<JournalEntry> past_entries;
 
     cout << "Your Journal." << endl;
     cout << "  An app by Justin Meredith." << endl;
 
     while (running) {
+        past_entries =  loadUserJournal();
         cout << menu_line;
         cout << endl << "What would you like to do today?" << endl << endl;
         cout << "    1. Write a new journal entry" << endl;
@@ -71,6 +72,7 @@ int main() {
 
         cin >> user_decision;
 
+        // Enter a new journal entry
         if (user_decision == "1") {
             cout << menu_line;
             string user_entry_title;
@@ -79,9 +81,12 @@ int main() {
             getline(cin, user_entry_title, '\n');
             JournalEntry new_entry(user_entry_title);
             new_entry.writeInJournal();
+
+        // View a list of past journal entries
         } else if (user_decision == "2") {
-            past_entries = loadUserJournal();
             displayPreviousEntries(past_entries);
+        
+        // Append text to a past journal entry
         } else if (user_decision == "3") {
             displayPreviousEntries(past_entries);
             int user_entry_selection;
@@ -96,11 +101,13 @@ int main() {
                 cin.ignore();
                 cin >> user_entry_selection;
 
+                // Make sure an int character was entered
                 if (!cin) {
                     cout << journal_selection_error_message;
                     continue;
                 }
 
+                // Make sure that the int character entered corresponds to a possible option
                 if (user_entry_selection <= past_entries.size() && user_entry_selection >= 0) {
                     valid_input = true;
                 } else {
@@ -108,15 +115,22 @@ int main() {
                 }
             }
 
+            // Continues if the user chooses a past entry or returns to the main menu if they entered 0
             if (user_entry_selection != 0) {
                 past_entries.at(user_entry_selection - 1).addToJournalEntry();
             }
+
+        // Deletes a past journal entry
         } else if (user_decision == "4") {
             cout << "This option is not currently functional." << endl;
+
+        // Quits the program
         } else if (user_decision == "0") {
             cout << endl << "Thanks for stopping by! See you next time." << endl;
             cout << menu_line;
             running = false;
+
+        // Handles invalid input for the menu selection
         } else {
             cout << "<*> Please choose an option from the list and enter its corresponding number. <*>" << endl;
             cout << "<*> For instance, to choose the first option, 'Write a new journal entry',    <*>" << endl;
