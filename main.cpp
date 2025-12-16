@@ -47,10 +47,14 @@ void displayPreviousEntries(vector<JournalEntry> past_entries) {
 
 int main() {
     bool running = true;
+
+    // Formatting Strings
     string menu_line = "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
+    string journal_selection_error_message = menu_line + "<*> Please enter a valid selection by typing the number that corresponds to the   <*>\n<*> entry you would like to open. For instance, type '1' to open the first entry. <*>\n<*> Or enter '0' to return to the main menu.                                      <*>\n" + menu_line;
+
     string user_decision;
     vector<JournalEntry> user_journal;
-    vector<JournalEntry> past_entries;
+    vector<JournalEntry> past_entries = loadUserJournal();
 
     cout << "Your Journal." << endl;
     cout << "  An app by Justin Meredith." << endl;
@@ -93,26 +97,20 @@ int main() {
                 cin >> user_entry_selection;
 
                 if (!cin) {
-                    cout << menu_line;
-                    cout << "<*> Please enter a valid selection by typing the number that corresponds to the   <*>" << endl;
-                    cout << "<*> entry you would like to open. For instance, type '1' to open the first entry. <*>" << endl;
-                    cout << "<*> Or enter '0' to return to the main menu.                                      <*>" << endl;
-                    cout << menu_line;
+                    cout << journal_selection_error_message;
                     continue;
                 }
 
                 if (user_entry_selection <= past_entries.size() && user_entry_selection >= 0) {
                     valid_input = true;
                 } else {
-                    cout << menu_line;
-                    cout << "<*> Please enter a valid selection by typing the number that corresponds to the   <*>" << endl;
-                    cout << "<*> entry you would like to open. For instance, type '1' to open the first entry. <*>" << endl;
-                    cout << "<*> Or enter '0' to return to the main menu.                                      <*>" << endl;
-                    cout << menu_line;
+                    cout << journal_selection_error_message;
                 }
             }
 
-            past_entries.at(user_entry_selection - 1).addToJournalEntry();
+            if (user_entry_selection != 0) {
+                past_entries.at(user_entry_selection - 1).addToJournalEntry();
+            }
         } else if (user_decision == "4") {
             cout << "This option is not currently functional." << endl;
         } else if (user_decision == "0") {
