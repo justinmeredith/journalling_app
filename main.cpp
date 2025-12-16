@@ -4,6 +4,8 @@
 #include "JournalEntry.cpp"
 #include <vector>
 #include <filesystem>
+#include <cstdio>
+#include <cstring>
 
  vector<JournalEntry> loadUserJournal() {
     vector<JournalEntry> loaded_entries;
@@ -50,7 +52,7 @@ int main() {
 
     // Formatting Strings
     string menu_line = "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
-    string journal_selection_error_message = menu_line + "<*> Please enter a valid selection by typing the number that corresponds to the   <*>\n<*> entry you would like to open. For instance, type '1' to open the first entry. <*>\n<*> Or enter '0' to return to the main menu.                                      <*>\n" + menu_line;
+    string journal_selection_error_message = menu_line + "<*> Please enter a valid selection by typing the number that corresponds to the     <*>\n<*> entry you would like to select. For instance, type '1' to open the first entry. <*>\n<*> Or enter '0' to return to the main menu.                                        <*>\n" + menu_line;
 
     string user_decision;
     vector<JournalEntry> user_journal;
@@ -122,7 +124,44 @@ int main() {
 
         // Deletes a past journal entry
         } else if (user_decision == "4") {
-            cout << "This option is not currently functional." << endl;
+            displayPreviousEntries(past_entries);
+            int user_entry_selection;
+            bool valid_input = false;
+
+            // Make sure a viable journal entry was selected
+            while (!valid_input) {
+                cout << endl << "Type the number of the entry you would like to delete." << endl;
+                cout << "Or enter '0' to return to the main menu." << endl;
+                cout << "> ";
+                cin.clear();
+                cin.ignore();
+                cin >> user_entry_selection;
+
+                // Make sure an int character was entered
+                if (!cin) {
+                    cout << journal_selection_error_message;
+                    continue;
+                }
+
+                // Make sure that the int character entered corresponds to a possible option
+                if (user_entry_selection <= past_entries.size() && user_entry_selection >= 0) {
+                    valid_input = true;
+                } else {
+                    cout << journal_selection_error_message;
+                }
+            }
+
+            // Continues if the user chooses a past entry or returns to the main menu if they entered 0
+            if (user_entry_selection != 0) {
+                string deleting_file_name = past_entries.at(user_entry_selection - 1).getDateCreated() + ".txt";
+                string pretty_journal_entry_name = past_entries.at(user_entry_selection - 1).getPrettyDateCreated() + " - " + past_entries.at(user_entry_selection - 1).getTitle();
+                int file_deleted_successfully = remove(("entries/" + deleting_file_name).c_str());
+                if (file_deleted_successfully == 0) {
+                    cout << pretty_journal_entry_name << " was successfully deleted." << endl;
+                } else {
+                    cout << "There was an error deleting your journal entry." << endl;
+                }
+            }
 
         // Quits the program
         } else if (user_decision == "0") {
