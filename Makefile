@@ -1,7 +1,7 @@
 # Makefile
 
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall
+CXXFLAGS = -std=c++17 -Wall -lsqlite3
 TARGET = journal
 SRC = main.cpp
 
