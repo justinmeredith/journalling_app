@@ -40,7 +40,7 @@
      [](const JournalEntry& a, const JournalEntry& b) {
          return a.getDateCreated() < b.getDateCreated();
      });
-     
+
     return loaded_entries;
 }
 
@@ -95,6 +95,36 @@ int main() {
         // View a list of past journal entries
         } else if (user_decision == "2") {
             displayPreviousEntries(past_entries);
+            int user_entry_selection;
+            bool valid_input = false;
+
+            // Make sure a viable journal entry was selected
+            while (!valid_input) {
+                cout << endl << "Type the number of the entry you would like to view." << endl;
+                cout << "Or enter '0' to return to the main menu." << endl;
+                cout << "> ";
+                cin.clear();
+                cin.ignore();
+                cin >> user_entry_selection;
+
+                // Make sure an int character was entered
+                if (!cin) {
+                    cout << journal_selection_error_message;
+                    continue;
+                }
+
+                // Make sure that the int character entered corresponds to a possible option
+                if (user_entry_selection <= past_entries.size() && user_entry_selection >= 0) {
+                    valid_input = true;
+                } else {
+                    cout << journal_selection_error_message;
+                }
+            }
+
+            // Continues if the user chooses a past entry or returns to the main menu if they entered 0
+            if (user_entry_selection != 0) {
+                past_entries.at(user_entry_selection - 1).displayJournalEntry();
+            }
         
         // Append text to a past journal entry
         } else if (user_decision == "3") {
