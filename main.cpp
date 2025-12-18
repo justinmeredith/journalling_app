@@ -2,9 +2,9 @@
 // Development started in November of 2025.
 
 #include "JournalEntry.cpp"
+#include "JournalEntry.cpp"
 #include <vector>
 #include <filesystem>
-#include <cstdio>
 #include <cstring>
 #include <algorithm>
 
