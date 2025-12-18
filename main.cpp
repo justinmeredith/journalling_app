@@ -1,8 +1,7 @@
 // A journalling app created by Justin Meredith.
 // Development started in November of 2025.
 
-#include "JournalEntry.cpp"
-#include "JournalEntry.cpp"
+#include "JournalDatabase.cpp"
 #include <vector>
 #include <filesystem>
 #include <cstring>
@@ -53,17 +52,18 @@ void displayPreviousEntries(vector<JournalEntry> past_entries) {
             cout << "   " << i + 1 << ": " << past_entries.at(i).getPrettyDateCreated() << " - " << past_entries.at(i).getTitle() << endl;
         }
     } 
-}
+} 
 
 int main() {
     bool running = true;
+    JournalDatabase user_journal;
+    user_journal.initialize();
 
     // Formatting Strings
     string menu_line = "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
     string journal_selection_error_message = menu_line + "<*> Please enter a valid selection by typing the number that corresponds to the     <*>\n<*> entry you would like to select. For instance, type '1' to open the first entry. <*>\n<*> Or enter '0' to return to the main menu.                                        <*>\n" + menu_line;
 
     string user_decision;
-    vector<JournalEntry> user_journal;
     vector<JournalEntry> past_entries;
 
     cout << "Your Journal." << endl;
