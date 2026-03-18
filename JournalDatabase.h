@@ -10,5 +10,5 @@ class JournalDatabase {
         void addEntry(const JournalEntry& entry);
     private:
         sqlite3* database;
-        string filename = "journal_database.sqlite3";
+        const char* filename = "journal_database.db";
 };
