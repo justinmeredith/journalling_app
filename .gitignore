@@ -4,4 +4,4 @@ Journalling App Design Plan.md
 *.txt
 .DS_Store
 journal
-*.sqlite3
+*.db
