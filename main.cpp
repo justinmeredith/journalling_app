@@ -57,7 +57,6 @@ void displayPreviousEntries(vector<JournalEntry> past_entries) {
 int main() {
     bool running = true;
     JournalDatabase user_journal;
-    user_journal.initialize();
 
     // Formatting Strings
     string menu_line = "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
@@ -69,6 +68,9 @@ int main() {
     cout << "Your Journal." << endl;
     cout << "  An app by Justin Meredith." << endl;
 
+    user_journal.initialize();
+
+    // The main menu
     while (running) {
         past_entries =  loadUserJournal();
         cout << menu_line;
