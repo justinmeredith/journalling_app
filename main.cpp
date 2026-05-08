@@ -53,7 +53,7 @@ void displayPreviousEntries(vector<JournalEntry> past_entries) {
         }
     } 
 } 
-
+ 
 int main() {
     bool running = true;
     JournalDatabase user_journal;
@@ -93,6 +93,7 @@ int main() {
             getline(cin, user_entry_title, '\n');
             JournalEntry new_entry(user_entry_title);
             new_entry.writeInJournal();
+            user_journal.addEntry(new_entry);
 
         // View a list of past journal entries
         } else if (user_decision == "2") {
@@ -106,7 +107,7 @@ int main() {
                 cout << "Or enter '0' to return to the main menu." << endl;
                 cout << "> ";
                 cin.clear();
-                cin.ignore();
+                cin.ignore(); 
                 cin >> user_entry_selection;
 
                 // Make sure an int character was entered

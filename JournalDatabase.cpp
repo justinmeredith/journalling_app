@@ -22,3 +22,18 @@ void JournalDatabase::initialize() {
 
     sqlite3_exec(database, create_table, NULL, NULL, NULL);
 }
+
+void JournalDatabase::addEntry(const JournalEntry& entry) {
+    const string insert_entry = 
+        "INSERT INTO entries (\n"
+        "date_created,\n"
+        "pretty_date_created,\n"
+        "title,\n"
+        "body_text)"
+        "VALUES ('" + entry.getDateCreated() + "',\n"
+        "'" + entry.getPrettyDateCreated() + "',\n"
+        "'" + entry.getTitle() + "',\n"
+        "'" + entry.getText() + "')";
+
+    sqlite3_exec(database, insert_entry.c_str(), NULL, NULL, NULL);
+}
